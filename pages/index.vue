@@ -3,44 +3,15 @@
     <section class="intro">
       <h1>Get the latest tech news!</h1>
     </section>
-    <section class="featured-posts">
-      <PostPreview v-for="post in posts" :key="post.id" v-bind="post" />
-    </section>
+    <PostList />
   </div>
 </template>
 
 <script>
-import PostPreview from '~/components/Posts/PostPreview'
+import PostList from '~/components/Posts/PostList'
 export default {
   components: {
-    PostPreview
-  },
-  data() {
-    return {
-      posts: [
-        {
-          id: '1',
-          thumbnail:
-            'https://hypertechx.com/wp-content/uploads/2017/10/gettyimages-186450097.jpg',
-          title: 'Hello world!',
-          previewText: 'first post preview'
-        },
-        {
-          id: '2',
-          thumbnail:
-            'https://hypertechx.com/wp-content/uploads/2017/10/gettyimages-186450097.jpg',
-          title: 'Hello world! 2',
-          previewText: 'second post preview'
-        },
-        {
-          id: '3',
-          thumbnail:
-            'https://hypertechx.com/wp-content/uploads/2017/10/gettyimages-186450097.jpg',
-          title: 'Hello world! 3',
-          previewText: 'third post preview'
-        }
-      ]
-    }
+    PostList
   }
 }
 </script>
@@ -75,14 +46,5 @@ export default {
   .intro h1 {
     font-size: 2rem;
   }
-}
-
-.featured-posts {
-  display: flex;
-  padding: 20px;
-  box-sizing: border-box;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
 }
 </style>
