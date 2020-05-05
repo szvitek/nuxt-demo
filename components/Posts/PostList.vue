@@ -1,6 +1,11 @@
 <template>
   <section class="post-list">
-    <PostPreview v-for="post in posts" :key="post.id" v-bind="post" />
+    <PostPreview
+      v-for="post in posts"
+      :key="post.id"
+      v-bind="post"
+      :isAdmin="isAdmin"
+    />
   </section>
 </template>
 
@@ -9,6 +14,12 @@ import PostPreview from '~/components/Posts/PostPreview'
 export default {
   components: {
     PostPreview
+  },
+  props: {
+    isAdmin: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
