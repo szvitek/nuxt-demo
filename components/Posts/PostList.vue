@@ -19,33 +19,10 @@ export default {
     isAdmin: {
       type: Boolean,
       default: false
-    }
-  },
-  data() {
-    return {
-      posts: [
-        {
-          id: '1',
-          thumbnail:
-            'https://hypertechx.com/wp-content/uploads/2017/10/gettyimages-186450097.jpg',
-          title: 'Hello world!',
-          previewText: 'first post preview'
-        },
-        {
-          id: '2',
-          thumbnail:
-            'https://hypertechx.com/wp-content/uploads/2017/10/gettyimages-186450097.jpg',
-          title: 'Hello world! 2',
-          previewText: 'second post preview'
-        },
-        {
-          id: '3',
-          thumbnail:
-            'https://hypertechx.com/wp-content/uploads/2017/10/gettyimages-186450097.jpg',
-          title: 'Hello world! 3',
-          previewText: 'third post preview'
-        }
-      ]
+    },
+    posts: {
+      type: Array,
+      required: true
     }
   }
 }

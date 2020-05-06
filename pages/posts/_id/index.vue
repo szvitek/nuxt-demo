@@ -1,12 +1,12 @@
 <template>
   <div class="single-post-page">
     <section class="post">
-      <h1 class="post-title">Title of the post</h1>
+      <h1 class="post-title">{{ loadedPost.title }}</h1>
       <div class="post-details">
-        <div class="post-detail">Last updated on XXX</div>
-        <div class="post-detail">Written by NAME</div>
+        <div class="post-detail">{{ loadedPost.updatedDate }}</div>
+        <div class="post-detail">Written by {{ loadedPost.author }}</div>
       </div>
-      <p class="post-content">Content of the post</p>
+      <p class="post-content">{{ loadedPost.content }}</p>
     </section>
     <section class="post-feedback">
       <p>
@@ -16,6 +16,36 @@
     </section>
   </div>
 </template>
+
+<script>
+export default {
+  asyncData(context, callback) {
+    // merge the returned data with the vue data property
+    // asyncData can be used only inside PAGES folder
+    // 'this' is not available!
+    // this code runs on the server if we load this page first
+    // then it runs in the browser in spa mode
+    // we can access stuff from context (router, store, etc...)
+    // fetch is similar but it doesn't merge the data with the vue data
+
+    // eslint-disable-next-line nuxt/no-timing-in-fetch-data
+    setTimeout(() => {
+      callback(null, {
+        loadedPost: {
+          id: '1',
+          thumbnail:
+            'https://hypertechx.com/wp-content/uploads/2017/10/gettyimages-186450097.jpg',
+          title: `Hello world! (id: ${context.params.id})`,
+          previewText: 'first post preview',
+          author: 'jon doe',
+          updatedDate: new Date(),
+          content: 'lorem ipsum'
+        }
+      })
+    }, 2000)
+  }
+}
+</script>
 
 <style scoped>
 .single-post-page {
