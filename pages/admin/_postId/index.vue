@@ -1,7 +1,7 @@
 <template>
   <div class="admin-post-page">
     <section class="update-form">
-      <AdminPostForm :post="loadedPost" />
+      <AdminPostForm :post="loadedPost" @submit="onSubmit" />
     </section>
   </div>
 </template>
@@ -14,14 +14,30 @@ export default {
   components: {
     AdminPostForm
   },
-  data() {
-    return {
-      loadedPost: {
-        author: 'jon doe',
-        title: 'funky monkey',
-        content: 'nothing special here',
-        thumbnailLink:
-          'https://hypertechx.com/wp-content/uploads/2017/10/gettyimages-186450097.jpg'
+  async asyncData(context) {
+    try {
+      const data = await context.$axios.$get(
+        `/posts/${context.params.postId}.json`
+      )
+      return {
+        loadedPost: {
+          ...data,
+          id: context.params.postId
+        }
+      }
+    } catch (err) {
+      context.error(err)
+    }
+  },
+  methods: {
+    async onSubmit(editPost) {
+      try {
+        await this.$store.dispatch('editPost', editPost)
+        this.$router.push('/admin')
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err)
+        // todo
       }
     }
   }

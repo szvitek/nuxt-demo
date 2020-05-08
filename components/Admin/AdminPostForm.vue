@@ -2,12 +2,15 @@
   <form @submit.prevent="onSave">
     <AppControlInput v-model="editedPost.author">Author Name</AppControlInput>
     <AppControlInput v-model="editedPost.title">Title</AppControlInput>
-    <AppControlInput v-model="editedPost.thumbnailLink"
-      >Thumbnail Link</AppControlInput
-    >
-    <AppControlInput v-model="editedPost.content" control-type="textarea"
-      >Content</AppControlInput
-    >
+    <AppControlInput v-model="editedPost.thumbnail">
+      Thumbnail Link
+    </AppControlInput>
+    <AppControlInput v-model="editedPost.content" control-type="textarea">
+      Content
+    </AppControlInput>
+    <AppControlInput v-model="editedPost.previewText" control-type="textarea">
+      Preview Text
+    </AppControlInput>
     <AppButton type="submit">Save</AppButton>
     <AppButton
       @click="onCancel"
@@ -42,16 +45,15 @@ export default {
         : {
             author: '',
             title: '',
-            thumbnailLink: '',
-            content: ''
+            thumbnail: '',
+            content: '',
+            previewText: ''
           }
     }
   },
   methods: {
     onSave() {
-      // todo: save the post
-      // eslint-disable-next-line no-console
-      console.log(this.editedPost)
+      this.$emit('submit', { ...this.editedPost, updatedDate: new Date() })
     },
     onCancel() {
       this.$router.push('/admin')

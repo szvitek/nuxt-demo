@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  asyncData(context, callback) {
+  async asyncData(context) {
     // merge the returned data with the vue data property
     // asyncData can be used only inside PAGES folder
     // 'this' is not available!
@@ -28,21 +28,14 @@ export default {
     // we can access stuff from context (router, store, etc...)
     // fetch is similar but it doesn't merge the data with the vue data
 
-    // eslint-disable-next-line nuxt/no-timing-in-fetch-data
-    setTimeout(() => {
-      callback(null, {
-        loadedPost: {
-          id: '1',
-          thumbnail:
-            'https://hypertechx.com/wp-content/uploads/2017/10/gettyimages-186450097.jpg',
-          title: `Hello world! (id: ${context.params.id})`,
-          previewText: 'first post preview',
-          author: 'jon doe',
-          updatedDate: new Date(),
-          content: 'lorem ipsum'
-        }
-      })
-    }, 2000)
+    try {
+      const data = await context.$axios.$get(`/posts/${context.params.id}.json`)
+      return {
+        loadedPost: data
+      }
+    } catch (err) {
+      return context.error(err)
+    }
   }
 }
 </script>

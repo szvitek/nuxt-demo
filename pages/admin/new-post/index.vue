@@ -1,7 +1,7 @@
 <template>
   <div class="admin-new-post-page">
     <section class="new-post-form">
-      <AdminPostForm />
+      <AdminPostForm @submit="onSubmit" />
     </section>
   </div>
 </template>
@@ -13,6 +13,23 @@ export default {
   layout: 'admin',
   components: {
     AdminPostForm
+  },
+  methods: {
+    async onSubmit(postData) {
+      // $axios.get() returns the response object
+      // $axios.$get() return the data from the response
+
+      try {
+        // const newPost = await this.$axios.$post('/posts.json', postData)
+        await this.$store.dispatch('addPost', postData)
+        // eslint-disable-next-line no-console
+        this.$router.push('/admin')
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err)
+        // todo
+      }
+    }
   }
 }
 </script>
