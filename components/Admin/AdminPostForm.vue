@@ -17,20 +17,14 @@
       type="button"
       style="margin-left: 10px"
       btn-style="cancel"
-      >Cancel</AppButton
     >
+      Cancel
+    </AppButton>
   </form>
 </template>
 
 <script>
-import AppButton from '@/components/UI/AppButton'
-import AppControlInput from '@/components/UI/AppControlInput'
-
 export default {
-  components: {
-    AppButton,
-    AppControlInput
-  },
   props: {
     post: {
       type: Object,

@@ -1,9 +1,9 @@
 <template>
   <div class="admin-page">
     <section class="new-post">
-      <AppButton @click="$router.push('/admin/new-post')"
-        >Create post</AppButton
-      >
+      <AppButton @click="$router.push('/admin/new-post')">
+        Create post
+      </AppButton>
     </section>
     <section class="existing-posts">
       <h1>Existing Posts</h1>
@@ -13,14 +13,9 @@
 </template>
 
 <script>
-import AppButton from '@/components/UI/AppButton'
-import PostList from '@/components/Posts/PostList'
 export default {
+  name: 'AdminIndex',
   layout: 'admin',
-  components: {
-    AppButton,
-    PostList
-  },
   computed: {
     loadedPosts() {
       return this.$store.getters.loadedPosts

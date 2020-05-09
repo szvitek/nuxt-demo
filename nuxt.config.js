@@ -5,13 +5,19 @@ export default {
 
   /*
    ** Headers of the page
+   ** added to all pages,
+   ** can be overwritten in components in pages the folder
    */
   head: {
-    title: pkg.name,
+    title: 'WebDev BLOG',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'My Cool WebDev blog'
+      }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -24,18 +30,21 @@ export default {
 
   /*
    ** Customize the progress-bar color
+   ** if mode is spa: use loadingIndicator
    */
-  loading: { color: '#fff' },
+  loading: { color: '#f00', height: '4px', duratioin: 5000 },
 
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['@/assets/css/main.css'],
 
   /*
    ** Plugins to load before mounting the App
+   ** Every time you need to use Vue.use(), you should create a file
+   ** in plugins/ and add its path to plugins in nuxt.config.js.
    */
-  plugins: [],
+  plugins: ['~/plugins/core-components.js', '~/plugins/date-filter.js'],
 
   /*
    ** Nuxt.js modules
@@ -64,5 +73,15 @@ export default {
         })
       }
     }
+  },
+  env: {
+    // baseUrl will b injected as an env variable
+    // and can be acces as process.env.baseUrl or context.env.baseUrl
+    baseUrl: process.env.BASE_URL || 'https://nuxt-blog-561cd.firebaseio.com'
+  },
+  transition: {
+    // animations that played on navigations
+    name: 'fade',
+    mode: 'out-in'
   }
 }
