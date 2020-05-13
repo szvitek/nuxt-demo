@@ -1,4 +1,4 @@
-import pkg from './package'
+import bodyParser from 'body-parser'
 
 export default {
   mode: 'universal',
@@ -84,9 +84,10 @@ export default {
     // animations that played on navigations
     name: 'fade',
     mode: 'out-in'
-  }
+  },
   // global middleware
   // router: {
   //   middleware: 'log'
-  // }
+  // },
+  serverMiddleware: [bodyParser.json(), '~/api']
 }

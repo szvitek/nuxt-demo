@@ -90,6 +90,16 @@ const createStore = () => {
         Cookie.set('jwt', idToken)
         Cookie.set('expirationDate', exp)
         commit('SET_JWT', idToken)
+
+        await this.$axios.$post(
+          '/api/track-data',
+          {
+            data: 'authenticated'
+          },
+          {
+            baseURL: ''
+          }
+        )
       },
       initAuth({ commit }, req) {
         // eslint-disable-next-line no-console
