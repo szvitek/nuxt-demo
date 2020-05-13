@@ -52,7 +52,7 @@ export default {
   modules: ['@nuxtjs/axios'],
 
   axios: {
-    baseURL: 'https://nuxt-blog-561cd.firebaseio.com'
+    baseURL: process.env.BASE_URL
   },
 
   /*
@@ -77,11 +77,16 @@ export default {
   env: {
     // baseUrl will b injected as an env variable
     // and can be acces as process.env.baseUrl or context.env.baseUrl
-    baseUrl: process.env.BASE_URL || 'https://nuxt-blog-561cd.firebaseio.com'
+    baseUrl: process.env.BASE_URL,
+    firebaseKey: process.env.FIREBASE_KEY
   },
   transition: {
     // animations that played on navigations
     name: 'fade',
     mode: 'out-in'
   }
+  // global middleware
+  // router: {
+  //   middleware: 'log'
+  // }
 }
